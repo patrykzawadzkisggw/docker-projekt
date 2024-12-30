@@ -1,0 +1,21 @@
+version: "3.8"
+
+services:
+  frontend:
+    build:
+      context: ./containers-gui
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+
+  backend:
+    build:
+      context: ./containers-backend
+    ports:
+      - "8080:8080"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    environment:
+      - DOCKER_HOST=unix:///var/run/docker.sock
+    restart: always
