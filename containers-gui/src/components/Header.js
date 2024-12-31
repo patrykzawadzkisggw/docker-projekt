@@ -57,7 +57,8 @@ export const Header = () => {
                 <NavLink to="/" className={({ isActive }) => (isActive ? ActiveClas : InActiveClas)} aria-current="page" end>Kontenery</NavLink>
                 <NavLink to="/obrazy" className={({ isActive }) => (isActive ? ActiveClas : InActiveClas)}>Obrazy</NavLink>
                 <NavLink to="/sieci" className={({ isActive }) => (isActive ? ActiveClas : InActiveClas)}>Sieci</NavLink>
-                <NavLink to="/woluminy" className={({ isActive }) => (isActive ? ActiveClas : InActiveClas)}>Wolumeny</NavLink>
+                <NavLink to="/woluminy" className={({ isActive }) => (isActive ? ActiveClas : InActiveClas)}>Woluminy</NavLink>
+                <NavLink to="/produkty" className={({ isActive }) => (isActive ? ActiveClas : InActiveClas)}>produkty</NavLink>
               </div>
             </div>
           </div>
@@ -71,6 +72,7 @@ export const Header = () => {
           <NavLink to="/obrazy" className={({ isActive }) => (isActive ? ActiveClassMobile : InactiveClassMobile)}>Obrazy</NavLink>
           <NavLink to="/sieci" className={({ isActive }) => (isActive ? ActiveClassMobile : InactiveClassMobile)}>Sieci</NavLink>
           <NavLink to="/woluminy" className={({ isActive }) => (isActive ? ActiveClassMobile : InactiveClassMobile)}>Woluminy</NavLink>
+          <NavLink to="/produkty" className={({ isActive }) => (isActive ? ActiveClassMobile : InactiveClassMobile)}>Produkty</NavLink>
         </div>
       </div>
     </nav>

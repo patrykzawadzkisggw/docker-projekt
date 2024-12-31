@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@microsoft/signalr": "^8.0.7",
     "autoprefixer": "^10.4.20",
     "axios": "^1.7.9",
     "chart.js": "^4.4.7",
