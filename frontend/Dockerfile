@@ -6,6 +6,11 @@ COPY package*.json ./
 
 RUN npm install --legacy-peer-deps
 
+#ARG REACT_APP_API_URL
+#ARG REACT_APP_BACKEND_URL
+#ENV REACT_APP_API_URL=$REACT_APP_API_URL
+#ENV REACT_APP_BACKEND_URL=$REACT_APP_BACKEND_URL
+
 COPY . .
 
 RUN npm run build

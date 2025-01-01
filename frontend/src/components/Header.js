@@ -58,7 +58,7 @@ export const Header = () => {
                 <NavLink to="/obrazy" className={({ isActive }) => (isActive ? ActiveClas : InActiveClas)}>Obrazy</NavLink>
                 <NavLink to="/sieci" className={({ isActive }) => (isActive ? ActiveClas : InActiveClas)}>Sieci</NavLink>
                 <NavLink to="/woluminy" className={({ isActive }) => (isActive ? ActiveClas : InActiveClas)}>Woluminy</NavLink>
-                <NavLink to="/produkty" className={({ isActive }) => (isActive ? ActiveClas : InActiveClas)}>produkty</NavLink>
+                <NavLink to="/produkty" className={({ isActive }) => (isActive ? ActiveClas : InActiveClas)}>Produkty</NavLink>
               </div>
             </div>
           </div>

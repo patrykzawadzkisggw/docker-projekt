@@ -1,0 +1,9 @@
+Backend/bin/
+Backend/obj/
+Backend/*.user
+Backend/*.vs
+
+.git/
+.gitignore
+
+*.md
