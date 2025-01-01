@@ -64,7 +64,7 @@ services:
     ports:
       - "${SQL_PORT}:${SQL_PORT}"
     environment:
-      SA_PASSWORD_FILE: "/run/secrets/mssql_sa_password"
+      SA_PASSWORD: "${SA_PASSWORD}"
       ACCEPT_EULA: "${ACCEPT_EULA}"
     networks:
       - productnetwork
@@ -83,7 +83,3 @@ networks:
 
 volumes:
   sqlvolume:
-
-secrets:
-  mssql_sa_password:
-    file: ./mssql_sa_password.txt
