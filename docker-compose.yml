@@ -4,24 +4,28 @@ services:
   frontend:
     build:
       context: ./frontend
+    container_name: frontend
     ports:
-      - "80:80"
+      - "${FRONTEND_PORT}:${FRONTEND_PORT}"
     depends_on:
       - backendgo
       - backend
     networks:
       - productnetwork
+    env_file:
+      - .env
     restart: always
 
   backendgo:
     build:
       context: ./backendgo
+    container_name: backendgo
     ports:
-      - "8080:8080"
+      - "${GO_PORT}:${GO_PORT}"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     environment:
-      - DOCKER_HOST=unix:///var/run/docker.sock
+      - DOCKER_HOST
     networks:
       - productnetwork
     restart: always
@@ -30,13 +34,14 @@ services:
     build:
       context: ./Backend
       dockerfile: Dockerfile
+    container_name: backend
     ports:
-      - "5076:5076"
+      - "${ASP_PORT}:${ASP_PORT}"
     environment:
-      - ASPNETCORE_ENVIRONMENT=Development
-      - ASPNETCORE_URLS=http://+:5076
-      - Redis__ConnectionString=redis:6379
-      - ConnectionStrings__DefaultConnection=Server=sqlserver;Database=bazac;User=sa;Password=YourPassword123!;TrustServerCertificate=True
+      - ASPNETCORE_ENVIRONMENT
+      - ASPNETCORE_URLS
+      - Redis__ConnectionString
+      - ConnectionStrings__DefaultConnection=Server=sqlserver;Database=bazac;User=sa;Password=${SA_PASSWORD};TrustServerCertificate=True
     depends_on:
       - redis
       - sqlserver
@@ -44,26 +49,41 @@ services:
       - productnetwork
     restart: on-failure
   redis:
-    image: redis:latest
+    image: redis:alpine
+    container_name: redis
+    mem_limit: 512m 
+    cpu_shares: 512
     ports:
-      - "6379:6379"
+      - "${REDIS_PORT}:${REDIS_PORT}"
     networks:
       - productnetwork
 
   sqlserver:
     image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: sqlserver
     ports:
-      - "1433:1433"
+      - "${SQL_PORT}:${SQL_PORT}"
     environment:
-      SA_PASSWORD: "YourPassword123!"
-      ACCEPT_EULA: "Y"
+      SA_PASSWORD_FILE: "/run/secrets/mssql_sa_password"
+      ACCEPT_EULA: "${ACCEPT_EULA}"
     networks:
       - productnetwork
     volumes:
       - sqlvolume:/var/opt/mssql
+    healthcheck:
+      test: ["CMD-SHELL", "/opt/mssql-tools/bin/sqlcmd -S sqlserver -U SA -P ${SA_PASSWORD} -Q 'SELECT 1'"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+    restart: always
 
 networks:
   productnetwork:
+    driver: bridge
 
 volumes:
   sqlvolume:
+
+secrets:
+  mssql_sa_password:
+    file: ./mssql_sa_password.txt
