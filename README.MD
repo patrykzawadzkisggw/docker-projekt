@@ -12,6 +12,15 @@ This project is based on Docker Compose and runs a complete environment consisti
 
 The main goal of the project is to provide a way to manage Docker containers through a web interface, support real-time chat using Redis, and create a simple CRUD application.
 
+![image](img/1.png)
+![image](img/2.jpeg)
+![image](img/3.png)
+![image](img/4.png)
+![image](img/5.png)
+![image](img/6.png)
+![image](img/7.png)
+![image](img/8.png)
+
 ## Technologies Used
 
 The project uses the following technologies and tools:
@@ -34,8 +43,7 @@ Before running the project, make sure you have installed the following:
 
 ### 2. Configuration
 
-1. Copy the `.env.example` file to `.env`.
-2. Update the variables in the `.env` file if necessary.
+1. Update the variables in the `.env` file if necessary.
 
 ### 3. Running the Project
 
